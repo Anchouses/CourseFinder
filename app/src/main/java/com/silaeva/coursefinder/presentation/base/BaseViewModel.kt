@@ -15,4 +15,6 @@ abstract class BaseViewModel: ViewModel() {
     )
 
     val navigation: SharedFlow<Direction> = _navigation.asSharedFlow()
+
+    abstract fun updateDirection(direction: Direction)
 }
