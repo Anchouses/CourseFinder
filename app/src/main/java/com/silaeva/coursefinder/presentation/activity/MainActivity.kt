@@ -1,4 +1,4 @@
-package com.silaeva.coursefinder.presentation
+package com.silaeva.coursefinder.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

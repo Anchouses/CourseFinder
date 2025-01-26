@@ -6,6 +6,6 @@ import com.silaeva.coursefinder.presentation.base.BaseFragment
 class RegistrationFragment: BaseFragment() {
     @Composable
     override fun SetContent() {
-        TODO("Not yet implemented")
+        RegistrationScreen()
     }
 }
