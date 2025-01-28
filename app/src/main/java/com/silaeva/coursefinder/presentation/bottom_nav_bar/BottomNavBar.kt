@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,12 +16,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
 import com.silaeva.coursefinder.presentation.comon_ui.BottomNavIcon
 import com.silaeva.coursefinder.presentation.comon_ui.theme.DarkGray
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Stroke
 import com.silaeva.coursefinder.presentation.data_source.Direction
+import com.silaeva.coursefinder.presentation.favorites.FavoritesScreen
+import com.silaeva.coursefinder.presentation.profile.ProfileScreen
+import com.silaeva.coursefinder.presentation.search.SearchScreen
 
 
 @Composable
@@ -30,31 +33,23 @@ fun BottomNavBar() {
 
     var direction by remember { mutableStateOf(Direction.SEARCH) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter
     ) {
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .wrapContentHeight(),
-//            contentAlignment = Alignment.TopCenter
-//        ) {
-////            when (direction) {
-////                Direction.SEARCH -> SearchEventScreen()
-////                Direction.FAVOURITES -> ChatListScreen()
-////                Direction.PROFILE -> ProfileScreen()
-////                else -> SearchEventScreen()
-//            }
-//        }
-        Box(
+        when (direction) {
+            Direction.SEARCH -> SearchScreen()
+            Direction.FAVOURITES -> FavoritesScreen()
+            Direction.PROFILE -> ProfileScreen()
+            else -> SearchScreen()
+        }
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight(),
-            contentAlignment = Alignment.BottomCenter
+                .align(Alignment.BottomCenter)
         ) {
             HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
                 thickness = Spacing.border,
                 color = Stroke
             )
@@ -62,8 +57,8 @@ fun BottomNavBar() {
                 modifier = Modifier
                     .background(color = DarkGray)
                     .padding(
-//                        top = dimensionResource(id = R.dimen.common_margin_tiny),
-//                        bottom = dimensionResource(id = R.dimen.common_margin_tiny)
+                        top = Spacing.paddingMiddle,
+                        bottom = Spacing.paddingMiddle
                     )
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
@@ -98,4 +93,10 @@ fun BottomNavBar() {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BottomNavBarPreview() {
+    BottomNavBar()
 }

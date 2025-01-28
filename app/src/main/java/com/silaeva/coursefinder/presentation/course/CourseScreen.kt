@@ -38,6 +38,7 @@ fun CourseScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(color = Dark)
+            .padding(Spacing.paddingMiddle)
     ) {
         Box(
             modifier = Modifier

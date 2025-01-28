@@ -33,9 +33,22 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Stroke
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Typography
 import com.silaeva.coursefinder.presentation.comon_ui.theme.White
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RegistrationScreen() {
+    val viewModel: RegistrationViewModel = koinViewModel()
+    RegistrationScreenUI(
+        onEnterScreen = {
+            viewModel.onEnterScreenClick()
+        }
+    )
+}
+
+@Composable
+fun RegistrationScreenUI(
+    onEnterScreen: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -92,6 +105,9 @@ fun RegistrationScreen() {
                     style = Typography.labelSmall
                 )
                 Text(
+                    modifier = Modifier.clickable {
+                        onEnterScreen()
+                    },
                     text = "Войти",
                     color = Green,
                     style = Typography.labelSmall
@@ -120,14 +136,22 @@ fun RegistrationScreen() {
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_vk),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = White
                     )
                 }
                 Button(
                     modifier = Modifier
                         .weight(0.5f)
                         .clip(RoundedCornerShape(Spacing.commonRadius))
-                        .background(brush = Brush.verticalGradient(colors = listOf(OrangeTop, OrangeBottom)))
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    OrangeTop,
+                                    OrangeBottom
+                                )
+                            )
+                        )
                     ,
                     onClick = { },
                     colors = ButtonDefaults.buttonColors(
@@ -136,7 +160,8 @@ fun RegistrationScreen() {
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_ok),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = White
                     )
                 }
             }
@@ -147,5 +172,7 @@ fun RegistrationScreen() {
 @Preview(showBackground = true)
 @Composable
 fun RegistrationScreenPreview() {
-    RegistrationScreen()
+    RegistrationScreenUI(
+        onEnterScreen = {}
+    )
 }

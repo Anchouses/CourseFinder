@@ -4,6 +4,7 @@ enum class Direction {
     ONBOARDING,
     REGISTRATION,
     ENTER,
+    MAIN,
     SEARCH,
     COURSE,
     FAVOURITES,
