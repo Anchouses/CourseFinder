@@ -20,9 +20,23 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.Dark
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Green
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Typography
+import org.koin.androidx.compose.koinViewModel
+
 
 @Composable
 fun OnboardingScreen() {
+    val viewModel: OnboardingViewModel = koinViewModel()
+
+    OnboardingScreenUI(
+        onRegistrationScreen = {
+            viewModel.onRegistrationScreenClick()
+        }
+    )
+}
+@Composable
+fun OnboardingScreenUI(
+    onRegistrationScreen: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,11 +50,11 @@ fun OnboardingScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                    top = Spacing.onboardingTop,
-                    bottom = Spacing.paddingLarge,
-                    start = Spacing.paddingLarge,
-                    end = Spacing.paddingLarge
-                ),
+                        top = Spacing.onboardingTop,
+                        bottom = Spacing.paddingLarge,
+                        start = Spacing.paddingLarge,
+                        end = Spacing.paddingLarge
+                    ),
                 text = "Тысячи курсов\nв одном месте",
                 style = Typography.headlineLarge,
                 textAlign = TextAlign.Center
@@ -60,7 +74,7 @@ fun OnboardingScreen() {
             ),
             text = "Продолжить",
             backgroundColor = Green,
-            onClick = {}
+            onClick = onRegistrationScreen
         )
     }
 }
@@ -69,5 +83,7 @@ fun OnboardingScreen() {
 @Preview(showBackground = true)
 @Composable
 fun OnboardingScreenPreview() {
-    OnboardingScreen()
+    OnboardingScreenUI(
+        onRegistrationScreen = {}
+    )
 }

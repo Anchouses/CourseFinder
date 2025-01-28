@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
 import com.silaeva.coursefinder.presentation.comon_ui.InputTextField
@@ -33,9 +34,28 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Stroke
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Typography
 import com.silaeva.coursefinder.presentation.comon_ui.theme.White
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun EnterScreen() {
+
+    val viewModel: EnterViewModel = koinViewModel()
+
+    EnterScreenUI(
+        onEnter = {
+            viewModel.onBottomNavBar()
+        },
+        onRegistrationScreen = {
+            viewModel.onRegistrationScreen()
+        }
+    )
+}
+
+@Composable
+fun EnterScreenUI(
+    onEnter: () -> Unit,
+    onRegistrationScreen: () -> Unit
+) {
 
     Column(
         modifier = Modifier
@@ -75,7 +95,7 @@ fun EnterScreen() {
                 modifier = Modifier.padding(top = Spacing.paddingTiny),
                 text = "Вход",
                 backgroundColor = Green,
-                onClick = {}
+                onClick = onEnter
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(Spacing.paddingTiny)
@@ -85,18 +105,22 @@ fun EnterScreen() {
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        modifier = Modifier.clickable { },
                         text = "Нету аккаунта? ",
                         color = White,
                         style = Typography.labelSmall
                     )
                     Text(
+                        modifier = Modifier.clickable { onRegistrationScreen() },
                         text = "Регистрация",
                         color = Green,
                         style = Typography.labelSmall
                     )
                 }
                 Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {  },
+                    textAlign = TextAlign.Center,
                     text = "Забыл пароль",
                     color = Green,
                     style = Typography.labelSmall
@@ -125,7 +149,8 @@ fun EnterScreen() {
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_vk),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = White
                     )
                 }
                 Button(
@@ -147,7 +172,8 @@ fun EnterScreen() {
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_ok),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = White
                     )
                 }
             }
@@ -158,5 +184,8 @@ fun EnterScreen() {
 @Preview(showBackground = true)
 @Composable
 fun EnterScreenPreview() {
-    EnterScreen()
+    EnterScreenUI(
+        onEnter = {},
+        onRegistrationScreen = {}
+    )
 }

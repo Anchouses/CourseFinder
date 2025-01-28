@@ -14,9 +14,19 @@ import com.silaeva.coursefinder.presentation.comon_ui.CourseCard
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Dark
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Typography
+import org.koin.androidx.compose.koinViewModel
+
 
 @Composable
 fun FavoritesScreen() {
+
+    val viewModel: FavoritesViewModel = koinViewModel()
+
+    FavoritesScreenUI()
+}
+
+@Composable
+fun FavoritesScreenUI() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,5 +59,5 @@ fun FavoritesScreen() {
 @Preview(showBackground = true)
 @Composable
 fun FavoritesScreenPreview() {
-    FavoritesScreen()
+    FavoritesScreenUI()
 }

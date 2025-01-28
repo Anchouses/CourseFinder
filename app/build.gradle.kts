@@ -54,7 +54,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-
+    implementation (libs.androidx.appcompat)
     implementation (libs.androidx.constraintlayout)
 
     //Compose
@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.paging.compose)
 
     // Navigation
     implementation (libs.androidx.navigation.fragment.ktx)

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 
 abstract class BaseViewModel: ViewModel() {
 
-    private val _navigation = MutableSharedFlow<Direction>(
+    protected val _navigation = MutableSharedFlow<Direction>(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
