@@ -22,13 +22,13 @@ val presentationModule = module {
         EnterViewModel(get())
     }
     viewModel<SearchViewModel> {
-        SearchViewModel(get())
+        SearchViewModel(get(), get())
     }
     viewModel<CourseViewModel> {
         CourseViewModel()
     }
     viewModel<FavoritesViewModel> {
-        FavoritesViewModel()
+        FavoritesViewModel(get())
     }
     viewModel<ProfileViewModel> {
         ProfileViewModel()

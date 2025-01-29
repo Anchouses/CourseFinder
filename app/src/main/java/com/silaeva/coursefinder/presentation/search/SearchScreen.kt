@@ -41,6 +41,9 @@ fun SearchScreen() {
         lazyPagingItems = lazyPagingItems,
         addSearchText = {
             searchText.value = it
+        },
+        addCourseToFavorites = {
+            viewModel.saveCourse(it)
         }
     )
 }
@@ -49,7 +52,8 @@ fun SearchScreen() {
 fun SearchScreenUI(
     modifier: Modifier = Modifier,
     lazyPagingItems: LazyPagingItems<CourseModel>,
-    addSearchText: (String) -> Unit
+    addSearchText: (String) -> Unit,
+    addCourseToFavorites: (CourseModel) -> Unit
 ) {
     var openDialog by remember { mutableStateOf(false) }
     var searchText = ""
@@ -93,7 +97,7 @@ fun SearchScreenUI(
                                 description = item.description,
                                 price = item.price,
                                 onDescriptionClick = { },
-                                addToFavorites = { },
+                                addToFavorites = { addCourseToFavorites(item) },
                                 rating = "",
                                 date = item.date,
 

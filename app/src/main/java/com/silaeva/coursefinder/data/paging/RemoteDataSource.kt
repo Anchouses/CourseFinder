@@ -1,4 +1,4 @@
-package com.silaeva.coursefinder.data
+package com.silaeva.coursefinder.data.paging
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

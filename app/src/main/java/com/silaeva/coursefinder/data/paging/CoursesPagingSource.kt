@@ -1,4 +1,4 @@
-package com.silaeva.coursefinder.data
+package com.silaeva.coursefinder.data.paging
 
 import android.util.Log
 import androidx.paging.PagingSource
@@ -25,7 +25,7 @@ class CoursesPagingSource(
                     name = it.title ?: "",
                     owner = it.owner ?: 0L,
                     description = it.summary ?: "",
-                    rating = it.reviewSummary ?: 0L,
+                    rating = it.reviewSummary.toString() ?: "",
                     date = it.createDate ?: "",
                     price = it.price ?: "",
                     imageUrl = it.proctorUrl ?: ""
