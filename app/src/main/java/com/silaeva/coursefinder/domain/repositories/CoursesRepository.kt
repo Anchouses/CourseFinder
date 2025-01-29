@@ -1,8 +1,10 @@
 package com.silaeva.coursefinder.domain.repositories
 
-import com.silaeva.coursefinder.domain.domain_model.CourseResponseModel
+import androidx.paging.PagingData
+import com.silaeva.coursefinder.domain.domain_model.CourseModel
+import kotlinx.coroutines.flow.Flow
 
 interface CoursesRepository {
 
-    suspend fun getCourses(page: Int, size: Int): CourseResponseModel
+    fun getCourses(searchText: String): Flow<PagingData<CourseModel>>
 }

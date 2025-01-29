@@ -49,7 +49,9 @@ fun FavoritesScreenUI() {
                     description = "",
                     price = "",
                     onDescriptionClick = {  },
-                    addToFavorites = {}
+                    addToFavorites = {},
+                    rating = "",
+                    date = ""
                 )
             }
         }

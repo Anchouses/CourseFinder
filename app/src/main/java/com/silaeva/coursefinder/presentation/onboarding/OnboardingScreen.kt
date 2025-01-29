@@ -3,6 +3,7 @@ package com.silaeva.coursefinder.presentation.onboarding
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +11,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,14 +41,16 @@ fun OnboardingScreen() {
 fun OnboardingScreenUI(
     onRegistrationScreen: () -> Unit
 ) {
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Dark),
-        verticalArrangement = Arrangement.SpaceBetween
+            .background(color = Dark)
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.TopCenter),
+            verticalArrangement = Arrangement.Center
         ) {
             Text(
                 modifier = Modifier
@@ -61,17 +67,20 @@ fun OnboardingScreenUI(
             )
             Image(
                 modifier = Modifier
-                    .height(Spacing.onboardingHeight),
+                    .height(Spacing.onboardingHeight)
+                    .clip(RectangleShape),
                 painter = painterResource(id = R.drawable.onboarding),
                 contentDescription = null
             )
         }
         PrimaryButton(
-            modifier = Modifier.padding(
-                start = Spacing.paddingMiddle,
-                end = Spacing.paddingMiddle,
-                bottom = Spacing.onboardingBottom
-            ),
+            modifier = Modifier
+                .padding(
+                    start = Spacing.paddingMiddle,
+                    end = Spacing.paddingMiddle,
+                    bottom = Spacing.onboardingBottom
+                )
+                .align(Alignment.BottomCenter),
             text = "Продолжить",
             backgroundColor = Green,
             onClick = onRegistrationScreen
