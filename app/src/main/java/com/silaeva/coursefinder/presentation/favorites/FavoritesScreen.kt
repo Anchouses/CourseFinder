@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.silaeva.coursefinder.domain.domain_model.CourseModel
 import com.silaeva.coursefinder.presentation.comon_ui.CourseCard
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Dark
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
@@ -21,12 +23,17 @@ import org.koin.androidx.compose.koinViewModel
 fun FavoritesScreen() {
 
     val viewModel: FavoritesViewModel = koinViewModel()
+    val courses = viewModel.getCourses().collectAsState(initial = emptyList())
 
-    FavoritesScreenUI()
+    FavoritesScreenUI(
+        courses = courses.value
+    )
 }
 
 @Composable
-fun FavoritesScreenUI() {
+fun FavoritesScreenUI(
+    courses: List<CourseModel>
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,15 +50,14 @@ fun FavoritesScreenUI() {
             style = Typography.headlineLarge
         )
         LazyColumn {
-            items(10) {
+            items(courses.size) {
                 CourseCard(
-                    title = "",
-                    description = "",
-                    price = "",
+                    title = courses[it].name,
+                    description = courses[it].description,
+                    price = courses[it].price,
                     onDescriptionClick = {  },
-                    addToFavorites = {},
-                    rating = "",
-                    date = ""
+                    rating = courses[it].rating,
+                    date = courses[it].date
                 )
             }
         }
@@ -61,5 +67,7 @@ fun FavoritesScreenUI() {
 @Preview(showBackground = true)
 @Composable
 fun FavoritesScreenPreview() {
-    FavoritesScreenUI()
+    FavoritesScreenUI(
+        courses = emptyList()
+    )
 }

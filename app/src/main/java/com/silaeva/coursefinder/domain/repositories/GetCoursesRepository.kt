@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import com.silaeva.coursefinder.domain.domain_model.CourseModel
 import kotlinx.coroutines.flow.Flow
 
-interface CoursesRepository {
+interface GetCoursesRepository {
 
     fun getCourses(searchText: String): Flow<PagingData<CourseModel>>
 }

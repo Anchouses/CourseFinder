@@ -17,10 +17,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
@@ -40,9 +42,12 @@ fun CourseCard(
     date: String,
     rating: String,
     onDescriptionClick: () -> Unit,
-    addToFavorites: () -> Unit,
-    isSaved: Boolean = true
+    addToFavorites: () -> Unit = {},
+    isSaved: Boolean = false
 ) {
+    val isSavedState = remember {
+        mutableStateOf(isSaved)
+    }
     Column(
         modifier = Modifier
             .padding(bottom = Spacing.paddingMiddle)
@@ -62,7 +67,8 @@ fun CourseCard(
                     .fillMaxSize()
                     .clip(RoundedCornerShape(Spacing.paddingMiddle)),
                 painter = painterResource(id = R.drawable.exampl),
-                contentDescription = null
+                contentDescription = null,
+                contentScale = ContentScale.Crop
             )
             IconButton(
                 modifier = Modifier
@@ -74,18 +80,19 @@ fun CourseCard(
                     ),
                 onClick = {
                     addToFavorites()
+                    isSavedState.value = true
                 },
                 content = {
                     Icon(
                         modifier = Modifier
                             .padding(Spacing.paddingTiny),
-                        painter = if (isSaved) {
+                        painter = if (isSavedState.value) {
                             painterResource(id = R.drawable.ic_bookmark)
                         } else {
                             painterResource(id = R.drawable.ic_bookmark_border)
                         },
                         contentDescription = null,
-                        tint = if (isSaved) Green else White
+                        tint = if (isSavedState.value) Green else White
                     )
                 }
             )
@@ -198,6 +205,6 @@ fun CourseCardPreview() {
         addToFavorites = {},
         date = "",
         rating = "4,5",
-        isSaved = true
+        isSaved = false
     )
 }

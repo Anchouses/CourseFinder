@@ -1,6 +1,11 @@
-package com.silaeva.coursefinder.domain.domain_model
+package com.silaeva.coursefinder.data.data_model
 
-data class CourseModel(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class FavoriteCourse(
+    @PrimaryKey
     val id: Long,
     val name: String,
     val owner: Long,

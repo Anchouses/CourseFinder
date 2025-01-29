@@ -32,6 +32,7 @@ import org.koin.androidx.compose.koinViewModel
 fun ProfileScreen() {
 
     val viewModel: ProfileViewModel = koinViewModel()
+
     ProfileScreenUI()
 }
 
