@@ -34,9 +34,10 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.WhiteHintText
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchField(
+    modifier: Modifier = Modifier,
     hint: String,
     getResult: (String) -> Unit,
-    modifier: Modifier = Modifier
+    onFilterClick: () -> Unit
 ) {
     val text = remember { mutableStateOf("") }
     val interactionSource = remember { MutableInteractionSource() }
@@ -64,15 +65,7 @@ fun SearchField(
                 getResult(text.value)
             },
             modifier = Modifier
-                .fillMaxWidth(0.8f)
-//                .padding(
-//                    start = dimensionResource(id = R.dimen.common_margin_small),
-//                    top = dimensionResource(id = R.dimen.common_margin_extra_tiny),
-//                    bottom = dimensionResource(id = R.dimen.common_margin_extra_tiny),
-//                    end = dimensionResource(id = R.dimen.common_margin_small)
-//                )
-//                .height(dimensionResource(id = R.dimen.search_field_height))
-            ,
+                .fillMaxWidth(0.8f),
             textStyle = Typography.bodyMedium
         ) {
             OutlinedTextFieldDefaults.DecorationBox(
@@ -97,10 +90,7 @@ fun SearchField(
                     )
                 },
                 interactionSource = interactionSource,
-                contentPadding = OutlinedTextFieldDefaults.contentPadding(
-//                    top = dimensionResource(id = R.dimen.common_margin_tiny),
-//                    bottom = dimensionResource(id = R.dimen.common_margin_tiny)
-                ),
+                contentPadding = OutlinedTextFieldDefaults.contentPadding(),
                 colors = colors,
                 container = {
                     OutlinedTextFieldDefaults.ContainerBox(
@@ -122,7 +112,7 @@ fun SearchField(
                     color = DarkGray,
                     shape = CircleShape
                 ),
-            onClick = { },
+            onClick = { onFilterClick() },
             content = {
                 Icon(
                     modifier = Modifier,
@@ -141,6 +131,7 @@ fun SearchTextFieldPreview() {
     SearchField(
         modifier = Modifier,
         hint = "(stringResource(id = R.string.search))",
-        getResult = {}
+        getResult = {},
+        onFilterClick = {}
     )
 }

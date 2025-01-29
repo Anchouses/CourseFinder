@@ -37,8 +37,11 @@ fun CourseCard(
     title: String,
     description: String,
     price: String,
+    date: String,
+    rating: String,
     onDescriptionClick: () -> Unit,
-    addToFavorites: () -> Unit
+    addToFavorites: () -> Unit,
+    isSaved: Boolean = true
 ) {
     Column(
         modifier = Modifier
@@ -69,14 +72,20 @@ fun CourseCard(
                         color = Glass,
                         shape = CircleShape
                     ),
-                onClick = addToFavorites,
+                onClick = {
+                    addToFavorites()
+                },
                 content = {
                     Icon(
                         modifier = Modifier
                             .padding(Spacing.paddingTiny),
-                        painter = painterResource(id = R.drawable.ic_bookmark_border),
+                        painter = if (isSaved) {
+                            painterResource(id = R.drawable.ic_bookmark)
+                        } else {
+                            painterResource(id = R.drawable.ic_bookmark_border)
+                        },
                         contentDescription = null,
-                        tint = Color.White
+                        tint = if (isSaved) Green else White
                     )
                 }
             )
@@ -93,17 +102,20 @@ fun CourseCard(
                             color = Glass,
                             shape = RoundedCornerShape(Spacing.commonRadius)
                         )
-                        .padding(vertical = Spacing.paddingExtraTiny, horizontal = Spacing.paddingTiny),
+                        .padding(
+                            vertical = Spacing.paddingExtraTiny,
+                            horizontal = Spacing.paddingTiny
+                        ),
                     horizontalArrangement = Arrangement.spacedBy(Spacing.paddingExtraTiny),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_star_fill),
                         contentDescription = null,
-                        tint = White
+                        tint = Green
                     )
                     Text(
-                        text = "4.9",
+                        text = rating,
                         color = White
                     )
                 }
@@ -113,14 +125,16 @@ fun CourseCard(
                             color = Glass,
                             shape = RoundedCornerShape(Spacing.commonRadius)
                         )
-                        .padding(vertical = Spacing.paddingExtraTiny, horizontal = Spacing.paddingTiny)
+                        .padding(
+                            vertical = Spacing.paddingExtraTiny,
+                            horizontal = Spacing.paddingTiny
+                        )
                 ) {
                     Text(
-                        text = "Дата",
+                        text = date,
                         color = White
                     )
                 }
-
             }
         }
 
@@ -181,6 +195,9 @@ fun CourseCardPreview() {
         description = "afsdf",
         price = "6565",
         onDescriptionClick = {},
-        addToFavorites = {}
+        addToFavorites = {},
+        date = "",
+        rating = "4,5",
+        isSaved = true
     )
 }

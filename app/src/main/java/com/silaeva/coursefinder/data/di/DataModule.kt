@@ -1,7 +1,10 @@
 package com.silaeva.coursefinder.data.di
 
+import com.silaeva.coursefinder.data.CoursesPagingSource
+import com.silaeva.coursefinder.data.RemoteDataSource
 import com.silaeva.coursefinder.data.repository_impl.AuthRepositoryImpl
 import com.silaeva.coursefinder.data.repository_impl.CoursesRepositoryImpl
+import com.silaeva.coursefinder.data.retrofit_api.CoursesApi
 import com.silaeva.coursefinder.data.retrofite_client.RetrofitClient
 import com.silaeva.coursefinder.domain.repositories.AuthRepository
 import com.silaeva.coursefinder.domain.repositories.CoursesRepository
@@ -9,15 +12,15 @@ import org.koin.dsl.module
 
 val dataModule = module {
 
-    single <RetrofitClient>{
-        RetrofitClient
-    }
+    single { RetrofitClient }
 
-    single <AuthRepository>{
-        AuthRepositoryImpl(retrofitClient = get())
-    }
+    single<CoursesApi> { RetrofitClient.coursesApi }
 
-    single <CoursesRepository>{
-        CoursesRepositoryImpl(retrofitClient = get())
-    }
+    single { CoursesPagingSource(get(), get()) }
+
+    single { RemoteDataSource(get()) }
+
+    single<AuthRepository> { AuthRepositoryImpl(get()) }
+
+    single<CoursesRepository> { CoursesRepositoryImpl(get()) }
 }

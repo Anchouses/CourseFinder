@@ -17,6 +17,7 @@ loggingInterceptor = "5.0.0-alpha.11"
 navigationFragmentKtx = "2.8.5"
 okhttp = "5.0.0-alpha.11"
 paging = "3.3.5"
+pagingRuntime = "3.3.5"
 retrofit = "2.9.0"
 
 
@@ -28,6 +29,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntime" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterScalars" }

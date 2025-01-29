@@ -2,6 +2,7 @@ package com.silaeva.coursefinder.data.data_model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+
 data class Meta(
     val page: Int,
     val hasNext: Boolean,
@@ -15,108 +16,38 @@ data class CourseResponse(
 
 @Keep
 data class Course(
-    @SerializedName("actions")
-    val actions: String,
-    @SerializedName("announcements")
-    val announcements: String,
-    @SerializedName("assistants_group")
-    val assistantsGroup: String,
     @SerializedName("authors")
-    val authors: String,
-    @SerializedName("became_paid_at")
-    val becamePaidAt: String,
-    @SerializedName("became_published_at")
-    val becamePublishedAt: String,
+    val authors: List<Long?>,
     @SerializedName("begin_date")
-    val beginDate: String,
-    @SerializedName("begin_date_source")
-    val beginDateSource: String,
+    val beginDate: String? = null,
     @SerializedName("canonical_url")
-    val canonicalUrl: String,
-    @SerializedName("challenges_count")
-    val challengesCount: Int,
-    @SerializedName("commission_basic")
-    val commissionBasic: String,
-    @SerializedName("commission_promo")
-    val commissionPromo: String,
-    @SerializedName("content_details")
-    val contentDetails: String,
-    @SerializedName("continue_url")
-    val continueUrl: String,
-    @SerializedName("course_format")
-    val courseFormat: String,
-    @SerializedName("course_type")
-    val courseType: String,
+    val canonicalUrl: String? = null,
     @SerializedName("cover")
-    val cover: String,
+    val cover: String? = null,
     @SerializedName("create_date")
-    val createDate: String,
+    val createDate: String? = null,
     @SerializedName("currency_code")
-    val currencyCode: String,
-
+    val currencyCode: String? = null,
     @SerializedName("description")
-    val description: String,
-
-    @SerializedName("display_price")
-    val displayPrice: String,
-
+    val description: String? = null,
     @SerializedName("id")
-    val id: Int,
-
+    val id: Long? = null,
     @SerializedName("intro")
-    val intro: String,
-
+    val intro: String? = null,
     @SerializedName("owner")
-    val owner: String,
-
-    @SerializedName("peer_reviews_count")
-    val peerReviewsCount: Int,
-    @SerializedName("position")
-    val position: String,
-    @SerializedName("possible_currencies")
-    val possibleCurrencies: String,
-    @SerializedName("possible_type")
-    val possibleType: String,
-
+    val owner: Long? = null,
     @SerializedName("price")
-    val price: String,
-
-
+    val price: String? = null,
     @SerializedName("proctor_url")
-    val proctorUrl: String,
-    @SerializedName("progress")
-    val progress: String,
-    @SerializedName("quizzes_count")
-    val quizzesCount: Int,
-    @SerializedName("readiness")
-    val readiness: String,
+    val proctorUrl: String? = null,
     @SerializedName("referral_link")
-    val referralLink: String,
+    val referralLink: String? = null,
     @SerializedName("requirements")
-    val requirements: String,
+    val requirements: String? = null,
     @SerializedName("review_summary")
-    val reviewSummary: String,
-    @SerializedName("schedule_link")
-    val scheduleLink: String,
-    @SerializedName("schedule_long_link")
-    val scheduleLongLink: String,
-    @SerializedName("schedule_type")
-    val scheduleType: String,
-    @SerializedName("sections")
-    val sections: String,
-    @SerializedName("slug")
-    val slug: String,
-    @SerializedName("social_providers")
-    val socialProviders: String,
-    @SerializedName("soft_deadline")
-    val softDeadline: String,
-    @SerializedName("soft_deadline_source")
-    val softDeadlineSource: String,
-
+    val reviewSummary: Long? = null,
     @SerializedName("summary")
-    val summary: String,
-
+    val summary: String? = null,
     @SerializedName("title")
-    val title: String,
-
+    val title: String? = null,
 )
