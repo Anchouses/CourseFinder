@@ -6,7 +6,6 @@ enum class Direction {
     ENTER,
     MAIN,
     SEARCH,
-    COURSE,
     FAVOURITES,
     PROFILE
 }

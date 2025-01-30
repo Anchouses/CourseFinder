@@ -4,7 +4,7 @@ data class CourseModel(
     val id: Long,
     val name: String,
     val owner: Long,
-    val description: String,
+    val summary: String,
     val rating: String,
     val date: String,
     val price: String,

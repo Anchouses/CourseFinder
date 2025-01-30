@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
+import com.silaeva.coursefinder.domain.domain_model.CourseModel
 import com.silaeva.coursefinder.presentation.comon_ui.common_buttons.PrimaryButton
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Dark
 import com.silaeva.coursefinder.presentation.comon_ui.theme.DarkGray
@@ -33,7 +35,10 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.White
 import com.silaeva.coursefinder.presentation.comon_ui.theme.WhiteDescribeText
 
 @Composable
-fun CourseScreen() {
+fun CourseScreen(
+    courseModel: CourseModel,
+    onBackClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -77,7 +82,7 @@ fun CourseScreen() {
                         color = White,
                         shape = CircleShape
                     ),
-                onClick = { },
+                onClick = onBackClick,
                 content = {
                     Icon(
                         modifier = Modifier
@@ -111,10 +116,10 @@ fun CourseScreen() {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_star_fill),
                         contentDescription = null,
-                        tint = White
+                        tint = Green
                     )
                     Text(
-                        text = "4.9",
+                        text = courseModel.rating,
                         color = White
                     )
                 }
@@ -130,11 +135,10 @@ fun CourseScreen() {
                         )
                 ) {
                     Text(
-                        text = "Дата",
+                        text = courseModel.date,
                         color = White
                     )
                 }
-
             }
         }
 
@@ -146,7 +150,7 @@ fun CourseScreen() {
                 Text(
                     modifier = Modifier
                         .padding(vertical = Spacing.paddingMiddle),
-                    text = "Java-разработчик с нуля",
+                    text = courseModel.name,
                     style = Typography.titleLarge
                 )
                 Row {
@@ -162,7 +166,7 @@ fun CourseScreen() {
                         )
                         Text(
                             modifier = Modifier.padding(bottom = Spacing.paddingLarge),
-                            text = "Company name",
+                            text = courseModel.owner.toString(),
                             style = Typography.titleMedium
                         )
                     }
@@ -188,11 +192,11 @@ fun CourseScreen() {
                     style = Typography.titleLarge
                 )
                 Text(
-                    text = "У вас будет 7 видеоуроков в высоком качестве. На них спикер объясняет теорию и показывает как выполнять практические задания. Доступ к материалам сохраняется на 2 года. " +
-                            "Кроме теоретических материалов вас ждут тесты и практические задания. Они помогут лучше запомнить новую информацию",
+                    text = courseModel.summary,
                     style = Typography.bodyMedium,
                     color = WhiteDescribeText
                 )
+                Spacer(modifier = Modifier.height(Spacing.screenBottomMargin))
             }
         }
     }
@@ -201,5 +205,17 @@ fun CourseScreen() {
 @Preview(showBackground = true)
 @Composable
 fun CourseScreenPreview() {
-    CourseScreen()
+    CourseScreen(
+        CourseModel(
+            id = 0L,
+            name = "",
+            owner = 0L,
+            summary = "",
+            rating = "",
+            date = "",
+            price = "",
+            imageUrl = ""
+        ),
+        onBackClick = {}
+    )
 }

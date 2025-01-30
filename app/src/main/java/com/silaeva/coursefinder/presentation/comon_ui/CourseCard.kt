@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
 import com.silaeva.coursefinder.presentation.comon_ui.theme.DarkGray
@@ -41,7 +42,7 @@ fun CourseCard(
     price: String,
     date: String,
     rating: String,
-    onDescriptionClick: () -> Unit,
+    onCourseClick: () -> Unit,
     addToFavorites: () -> Unit = {},
     isSaved: Boolean = false
 ) {
@@ -161,12 +162,15 @@ fun CourseCard(
                         vertical = Spacing.paddingSmall
                     ),
                 style = Typography.bodySmall,
-                color = WhiteDescribeText
+                color = WhiteDescribeText,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
             )
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = price,
@@ -174,7 +178,7 @@ fun CourseCard(
                 )
                 Row(
                     modifier = Modifier.clickable {
-                        onDescriptionClick()
+                        onCourseClick()
                     }
                 ) {
                     Text(
@@ -201,7 +205,7 @@ fun CourseCardPreview() {
         title = "vcvzds",
         description = "afsdf",
         price = "6565",
-        onDescriptionClick = {},
+        onCourseClick = {},
         addToFavorites = {},
         date = "",
         rating = "4,5",

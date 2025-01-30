@@ -2,8 +2,10 @@ package com.silaeva.coursefinder.presentation.favorites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
@@ -20,19 +22,23 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun FavoritesScreen() {
+fun FavoritesScreen(
+    onCourseClick: (CourseModel) -> Unit
+) {
 
     val viewModel: FavoritesViewModel = koinViewModel()
     val courses = viewModel.getCourses().collectAsState(initial = emptyList())
 
     FavoritesScreenUI(
-        courses = courses.value
+        courses = courses.value,
+        onCourseClick = { onCourseClick(it) }
     )
 }
 
 @Composable
 fun FavoritesScreenUI(
-    courses: List<CourseModel>
+    courses: List<CourseModel>,
+    onCourseClick:(CourseModel) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -53,12 +59,15 @@ fun FavoritesScreenUI(
             items(courses.size) {
                 CourseCard(
                     title = courses[it].name,
-                    description = courses[it].description,
+                    description = courses[it].summary,
                     price = courses[it].price,
-                    onDescriptionClick = {  },
+                    onCourseClick = { onCourseClick(courses[it]) },
                     rating = courses[it].rating,
                     date = courses[it].date
                 )
+            }
+            item{
+                Spacer(modifier = Modifier.height(Spacing.screenBottomMargin))
             }
         }
     }
@@ -68,6 +77,7 @@ fun FavoritesScreenUI(
 @Composable
 fun FavoritesScreenPreview() {
     FavoritesScreenUI(
-        courses = emptyList()
+        courses = emptyList(),
+        onCourseClick = {}
     )
 }

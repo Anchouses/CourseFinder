@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
@@ -29,11 +31,11 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(
+    onCourseClick: (CourseModel) -> Unit
+) {
     val viewModel: SearchViewModel = koinViewModel()
-    val searchText = remember {
-        mutableStateOf("")
-    }
+    val searchText = remember { mutableStateOf("") }
     val pager = viewModel.getCourses(searchText.value)
     val lazyPagingItems = pager.collectAsLazyPagingItems()
 
@@ -44,7 +46,8 @@ fun SearchScreen() {
         },
         addCourseToFavorites = {
             viewModel.saveCourse(it)
-        }
+        },
+        onCourseClick = { onCourseClick(it) }
     )
 }
 
@@ -53,7 +56,8 @@ fun SearchScreenUI(
     modifier: Modifier = Modifier,
     lazyPagingItems: LazyPagingItems<CourseModel>,
     addSearchText: (String) -> Unit,
-    addCourseToFavorites: (CourseModel) -> Unit
+    addCourseToFavorites: (CourseModel) -> Unit,
+    onCourseClick: (CourseModel) -> Unit
 ) {
     var openDialog by remember { mutableStateOf(false) }
     var searchText = ""
@@ -94,15 +98,18 @@ fun SearchScreenUI(
                         lazyPagingItems[it]?.let { item ->
                             CourseCard(
                                 title = item.name,
-                                description = item.description,
+                                description = item.summary,
                                 price = item.price,
-                                onDescriptionClick = { },
+                                onCourseClick = { onCourseClick(item) },
                                 addToFavorites = { addCourseToFavorites(item) },
                                 rating = "",
                                 date = item.date,
 
                             )
                         }
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(Spacing.screenBottomMargin))
                     }
                 }
             }
