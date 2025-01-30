@@ -27,7 +27,7 @@ import com.silaeva.coursefinder.data.data_model.CourseReview
 import com.silaeva.coursefinder.domain.domain_model.CourseModel
 import com.silaeva.coursefinder.presentation.comon_ui.CourseCard
 import com.silaeva.coursefinder.presentation.comon_ui.FilterDialog
-import com.silaeva.coursefinder.presentation.comon_ui.SearchField
+import com.silaeva.coursefinder.presentation.comon_ui.inputs.SearchField
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Dark
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import org.koin.androidx.compose.koinViewModel

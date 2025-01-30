@@ -1,4 +1,4 @@
-package com.silaeva.coursefinder.presentation.data_source
+package com.silaeva.coursefinder.presentation.presentation_model
 
 enum class Direction {
     ONBOARDING,

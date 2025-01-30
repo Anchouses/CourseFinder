@@ -1,7 +1,7 @@
 package com.silaeva.coursefinder.presentation.base
 
 import androidx.lifecycle.ViewModel
-import com.silaeva.coursefinder.presentation.data_source.Direction
+import com.silaeva.coursefinder.presentation.presentation_model.Direction
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
