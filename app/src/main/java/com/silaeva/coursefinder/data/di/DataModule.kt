@@ -25,7 +25,7 @@ val dataModule = module {
 
     single<AuthRepository> { AuthRepositoryImpl(get()) }
 
-    single<GetCoursesRepository> { GetCoursesRepositoryImpl(get()) }
+    single<GetCoursesRepository> { GetCoursesRepositoryImpl(get(), get()) }
 
     single <FavoriteCoursesRepository> {
         FavoriteCoursesRepositoryImpl.get()

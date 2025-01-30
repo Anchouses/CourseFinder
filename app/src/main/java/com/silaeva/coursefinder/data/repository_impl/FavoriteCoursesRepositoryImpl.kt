@@ -34,27 +34,17 @@ class FavoriteCoursesRepositoryImpl private constructor(context: Context): Favor
                     name = it.name,
                     owner = it.owner,
                     summary = it.description,
-                    rating = it.rating,
+                    review = it.rating,
                     date = it.date,
                     price = it.price,
-                    imageUrl = it.imageUrl
+                    imageUrl = it.imageUrl,
+                    isSaved = true
                 )
             }
         }
     }
 
-    override fun saveCourse(courseModel: CourseModel) {
-        val favoriteCourse = FavoriteCourse(
-            id = courseModel.id,
-            name = courseModel.name,
-            owner = courseModel.owner,
-            description = courseModel.summary,
-            rating = courseModel.rating,
-            date = courseModel.date,
-            price = courseModel.price,
-            imageUrl = courseModel.imageUrl
-        )
-
+    override fun saveCourse(favoriteCourse: FavoriteCourse) {
         executor.execute {
             favoriteDao.saveCourse(favoriteCourse)
         }

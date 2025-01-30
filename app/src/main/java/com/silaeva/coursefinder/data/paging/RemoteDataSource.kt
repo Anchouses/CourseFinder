@@ -8,7 +8,7 @@ class RemoteDataSource(
     private val coursesApi: CoursesApi
 ) {
     fun getCourses(searchText: String) = Pager(
-        config = PagingConfig(pageSize = 20),
+        config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { CoursesPagingSource(coursesApi, searchText) }
     ).flow
 }

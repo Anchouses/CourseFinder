@@ -34,18 +34,9 @@ import com.silaeva.coursefinder.presentation.search.SearchScreen
 fun BottomNavBar() {
 
     var direction by remember { mutableStateOf(Direction.SEARCH) }
-    var course by remember {
+    var courseState by remember {
         mutableStateOf(
-            CourseModel(
-                id = 0L,
-                name = "",
-                owner = 0L,
-                summary = "",
-                rating = "",
-                date = "",
-                price = "",
-                imageUrl = ""
-            )
+            CourseModel(0L, "", "", "", "", "", "", "", false)
         )
     }
     var isShowCourse by remember { mutableStateOf(false) }
@@ -56,36 +47,36 @@ fun BottomNavBar() {
     ) {
         when (direction) {
             Direction.SEARCH -> SearchScreen(
-                onCourseClick = {
-                    course = it
+                onCourseClick = { course ->
+                    courseState = course
                     isShowCourse = true
                 }
             )
 
             Direction.FAVOURITES -> FavoritesScreen(
-                onCourseClick = {
-                    course = it
+                onCourseClick = { course ->
+                    courseState = course
                     isShowCourse = true
                 }
             )
 
             Direction.PROFILE -> ProfileScreen(
-                onCourseClick = {
-                    course = it
+                onCourseClick = { course ->
+                    courseState = course
                     isShowCourse = true
                 }
             )
 
             else -> SearchScreen(
-                onCourseClick = {
-                    course = it
+                onCourseClick = { course ->
+                    courseState = course
                     isShowCourse = true
                 }
             )
         }
         if (isShowCourse) {
             CourseScreen(
-                courseModel = course,
+                courseModel = courseState,
                 onBackClick = {
                     isShowCourse = false
                 }

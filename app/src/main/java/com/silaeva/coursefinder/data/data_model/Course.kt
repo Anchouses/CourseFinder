@@ -3,15 +3,50 @@ package com.silaeva.coursefinder.data.data_model
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+data class CourseResponse(
+    @SerializedName("meta")
+    val meta: Meta,
+    @SerializedName("courses")
+    val courses: List<Course>
+)
+
+data class ReviewResponse(
+    @SerializedName("meta")
+    val meta: Meta,
+    @SerializedName("course-review-summaries")
+    val reviews: List<CourseReview>
+)
+
+data class OwnerResponse(
+    @SerializedName("meta")
+    val meta: Meta,
+    @SerializedName("users")
+    val users: List<CourseOwner>
+)
+
 data class Meta(
+    @SerializedName("page")
     val page: Int,
+    @SerializedName("hasNext")
     val hasNext: Boolean,
+    @SerializedName("hasPrevious")
     val hasPrevious: Boolean
 )
 
-data class CourseResponse(
-    val meta: Meta,
-    val courses: List<Course>
+data class CourseReview(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("course")
+    val courseId: Long,
+    @SerializedName("average")
+    val average: Double
+)
+
+data class CourseOwner(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("full_name")
+    val fullName: String? = null
 )
 
 @Keep
@@ -50,4 +85,6 @@ data class Course(
     val summary: String? = null,
     @SerializedName("title")
     val title: String? = null,
+    @SerializedName("difficulty")
+    val difficulty: String? = null,
 )

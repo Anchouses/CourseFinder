@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
@@ -39,11 +42,11 @@ fun CourseScreen(
     courseModel: CourseModel,
     onBackClick: () -> Unit
 ) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Dark)
-            .padding(Spacing.paddingMiddle)
     ) {
         Box(
             modifier = Modifier
@@ -53,7 +56,8 @@ fun CourseScreen(
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painterResource(id = R.drawable.exampl),
-                contentDescription = null
+                contentDescription = null,
+                contentScale = ContentScale.Crop
             )
             IconButton(
                 modifier = Modifier
@@ -68,9 +72,13 @@ fun CourseScreen(
                     Icon(
                         modifier = Modifier
                             .padding(Spacing.paddingTiny),
-                        painter = painterResource(id = R.drawable.ic_bookmark_border),
+                        painter = if (courseModel.isSaved) {
+                            painterResource(id = R.drawable.ic_bookmark)
+                        } else {
+                            painterResource(id = R.drawable.ic_bookmark_border)
+                        },
                         contentDescription = null,
-                        tint = Dark
+                        tint = if (courseModel.isSaved) Green else Dark
                     )
                 }
             )
@@ -119,7 +127,7 @@ fun CourseScreen(
                         tint = Green
                     )
                     Text(
-                        text = courseModel.rating,
+                        text = courseModel.review,
                         color = White
                     )
                 }
@@ -153,10 +161,16 @@ fun CourseScreen(
                     text = courseModel.name,
                     style = Typography.titleLarge
                 )
-                Row {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.paddingSmall)
+                ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_star_fill),
-                        contentDescription = null
+                        modifier = Modifier
+                            .size(Spacing.buttonHeight)
+                            .clip(CircleShape),
+                        painter = painterResource(id = R.drawable.exampl),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
                     )
                     Column {
                         Text(
@@ -166,7 +180,7 @@ fun CourseScreen(
                         )
                         Text(
                             modifier = Modifier.padding(bottom = Spacing.paddingLarge),
-                            text = courseModel.owner.toString(),
+                            text = courseModel.owner,
                             style = Typography.titleMedium
                         )
                     }
@@ -196,6 +210,8 @@ fun CourseScreen(
                     style = Typography.bodyMedium,
                     color = WhiteDescribeText
                 )
+            }
+            item {
                 Spacer(modifier = Modifier.height(Spacing.screenBottomMargin))
             }
         }
@@ -209,12 +225,13 @@ fun CourseScreenPreview() {
         CourseModel(
             id = 0L,
             name = "",
-            owner = 0L,
+            owner = "0L",
             summary = "",
-            rating = "",
+            review = "0L",
             date = "",
             price = "",
-            imageUrl = ""
+            imageUrl = "",
+            isSaved = true
         ),
         onBackClick = {}
     )

@@ -27,12 +27,13 @@ class CoursesPagingSource(
                 CourseModel(
                     id = it.id ?: 0,
                     name = it.title ?: "",
-                    owner = it.owner ?: 0L,
+                    owner = it.owner.toString() ?: "",
                     summary = it.summary ?: "",
-                    rating = it.reviewSummary.toString() ?: "",
+                    review = it.reviewSummary.toString() ?: "",
                     date = it.createDate?.let { date -> getDate(date) } ?: "",
                     price = it.price?.let { price -> "$price ₽" } ?: "Бесплатно",
-                    imageUrl = it.proctorUrl ?: ""
+                    imageUrl = it.proctorUrl ?: "",
+                    isSaved = false
                 )
             } ?: emptyList()
             if (response.isSuccessful) {
@@ -58,4 +59,5 @@ class CoursesPagingSource(
         val transDate = inputFormat.parse(inputDate)
         return transDate?.let { outputFormat.format(it) }
     }
+
 }

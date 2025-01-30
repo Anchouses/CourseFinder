@@ -92,14 +92,15 @@ fun RegistrationScreenUI(
                 modifier = Modifier.padding(top = Spacing.paddingTiny),
                 text = "Регистрация",
                 backgroundColor = Green,
-                onClick = {}
+                onClick = {
+                    onEnterScreen()
+                }
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    modifier = Modifier.clickable {  },
                     text = "Уже есть аккаунт? ",
                     color = White,
                     style = Typography.labelSmall
