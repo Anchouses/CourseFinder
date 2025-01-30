@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
-import com.silaeva.coursefinder.presentation.comon_ui.InputTextField
+import com.silaeva.coursefinder.presentation.comon_ui.inputs.InputTextField
 import com.silaeva.coursefinder.presentation.comon_ui.common_buttons.PrimaryButton
 import com.silaeva.coursefinder.presentation.comon_ui.theme.BlueVK
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Dark

@@ -1,4 +1,4 @@
-package com.silaeva.coursefinder.presentation.comon_ui
+package com.silaeva.coursefinder.presentation.comon_ui.inputs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource

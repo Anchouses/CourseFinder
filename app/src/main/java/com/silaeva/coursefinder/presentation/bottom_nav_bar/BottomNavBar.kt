@@ -24,7 +24,7 @@ import com.silaeva.coursefinder.presentation.comon_ui.theme.DarkGray
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Stroke
 import com.silaeva.coursefinder.presentation.course.CourseScreen
-import com.silaeva.coursefinder.presentation.data_source.Direction
+import com.silaeva.coursefinder.presentation.presentation_model.Direction
 import com.silaeva.coursefinder.presentation.favorites.FavoritesScreen
 import com.silaeva.coursefinder.presentation.profile.ProfileScreen
 import com.silaeva.coursefinder.presentation.search.SearchScreen

@@ -9,7 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.silaeva.coursefinder.R
 import com.silaeva.coursefinder.presentation.base.BaseFragment
-import com.silaeva.coursefinder.presentation.data_source.Direction
+import com.silaeva.coursefinder.presentation.presentation_model.Direction
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

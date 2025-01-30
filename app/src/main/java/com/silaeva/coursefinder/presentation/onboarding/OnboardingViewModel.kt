@@ -1,7 +1,7 @@
 package com.silaeva.coursefinder.presentation.onboarding
 
 import com.silaeva.coursefinder.presentation.base.BaseViewModel
-import com.silaeva.coursefinder.presentation.data_source.Direction
+import com.silaeva.coursefinder.presentation.presentation_model.Direction
 
 class OnboardingViewModel: BaseViewModel() {
 

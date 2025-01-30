@@ -1,7 +1,8 @@
-package com.silaeva.coursefinder.presentation
+package com.silaeva.coursefinder.presentation.app
 
 import android.app.Application
 import com.silaeva.coursefinder.data.di.dataModule
+import com.silaeva.coursefinder.data.di.domainModule
 import com.silaeva.coursefinder.data.di.presentationModule
 import com.silaeva.coursefinder.data.repository_impl.FavoriteCoursesRepositoryImpl
 import org.koin.android.ext.koin.androidContext
@@ -13,12 +14,12 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        FavoriteCoursesRepositoryImpl.initialize(this)
-
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
-            modules(listOf(presentationModule, dataModule))
+            modules(listOf(dataModule, domainModule, presentationModule))
         }
+
+        FavoriteCoursesRepositoryImpl.initialize(this)
     }
 }
