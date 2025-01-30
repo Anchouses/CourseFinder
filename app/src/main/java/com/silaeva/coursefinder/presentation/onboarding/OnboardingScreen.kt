@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -67,10 +68,11 @@ fun OnboardingScreenUI(
             )
             Image(
                 modifier = Modifier
-                    .height(Spacing.onboardingHeight)
-                    .clip(RectangleShape),
+                    .fillMaxWidth()
+                    .height(Spacing.onboardingHeight),
                 painter = painterResource(id = R.drawable.onboarding),
-                contentDescription = null
+                contentDescription = null,
+                contentScale = ContentScale.Crop
             )
         }
         PrimaryButton(

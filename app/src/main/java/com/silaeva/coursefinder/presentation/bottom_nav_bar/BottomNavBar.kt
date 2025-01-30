@@ -18,10 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.silaeva.coursefinder.R
+import com.silaeva.coursefinder.domain.domain_model.CourseModel
 import com.silaeva.coursefinder.presentation.comon_ui.BottomNavIcon
 import com.silaeva.coursefinder.presentation.comon_ui.theme.DarkGray
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Stroke
+import com.silaeva.coursefinder.presentation.course.CourseScreen
 import com.silaeva.coursefinder.presentation.data_source.Direction
 import com.silaeva.coursefinder.presentation.favorites.FavoritesScreen
 import com.silaeva.coursefinder.presentation.profile.ProfileScreen
@@ -32,16 +34,62 @@ import com.silaeva.coursefinder.presentation.search.SearchScreen
 fun BottomNavBar() {
 
     var direction by remember { mutableStateOf(Direction.SEARCH) }
+    var course by remember {
+        mutableStateOf(
+            CourseModel(
+                id = 0L,
+                name = "",
+                owner = 0L,
+                summary = "",
+                rating = "",
+                date = "",
+                price = "",
+                imageUrl = ""
+            )
+        )
+    }
+    var isShowCourse by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         when (direction) {
-            Direction.SEARCH -> SearchScreen()
-            Direction.FAVOURITES -> FavoritesScreen()
-            Direction.PROFILE -> ProfileScreen()
-            else -> SearchScreen()
+            Direction.SEARCH -> SearchScreen(
+                onCourseClick = {
+                    course = it
+                    isShowCourse = true
+                }
+            )
+
+            Direction.FAVOURITES -> FavoritesScreen(
+                onCourseClick = {
+                    course = it
+                    isShowCourse = true
+                }
+            )
+
+            Direction.PROFILE -> ProfileScreen(
+                onCourseClick = {
+                    course = it
+                    isShowCourse = true
+                }
+            )
+
+            else -> SearchScreen(
+                onCourseClick = {
+                    course = it
+                    isShowCourse = true
+                }
+            )
+        }
+        if (isShowCourse) {
+            CourseScreen(
+                courseModel = course,
+                onBackClick = {
+                    isShowCourse = false
+                }
+            )
         }
         Column(
             modifier = Modifier
@@ -57,7 +105,7 @@ fun BottomNavBar() {
                 modifier = Modifier
                     .background(color = DarkGray)
                     .padding(
-                        top = Spacing.paddingMiddle,
+                        top = Spacing.paddingSmall,
                         bottom = Spacing.paddingMiddle
                     )
                     .fillMaxWidth(),

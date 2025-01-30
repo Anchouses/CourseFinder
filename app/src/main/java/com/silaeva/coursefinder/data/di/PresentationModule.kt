@@ -31,6 +31,6 @@ val presentationModule = module {
         FavoritesViewModel(get())
     }
     viewModel<ProfileViewModel> {
-        ProfileViewModel()
+        ProfileViewModel(get())
     }
 }

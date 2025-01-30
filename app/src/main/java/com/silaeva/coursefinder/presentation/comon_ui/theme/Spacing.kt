@@ -17,4 +17,5 @@ object Spacing {
     val onboardingBottom = 40.dp
     val onboardingHeight = 316.dp
     val courseImageHeight = 240.dp
+    val screenBottomMargin = 80.dp
 }

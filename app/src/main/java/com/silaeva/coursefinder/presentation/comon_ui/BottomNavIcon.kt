@@ -2,6 +2,7 @@ package com.silaeva.coursefinder.presentation.comon_ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -10,12 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Green
+import com.silaeva.coursefinder.presentation.comon_ui.theme.Spacing
 import com.silaeva.coursefinder.presentation.comon_ui.theme.Typography
 import com.silaeva.coursefinder.presentation.comon_ui.theme.White
 
 @Composable
 fun BottomNavIcon(
-    modifier: Modifier = Modifier,
     painterResource: Int,
     title: String,
     onClick: () -> Unit,
@@ -32,9 +33,7 @@ fun BottomNavIcon(
             Icon(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-//                    .width(dimensionResource(id = R.dimen.nav_bar_icon_size))
-//                    .height(dimensionResource(id = R.dimen.nav_bar_icon_size))
-                ,
+                    .padding(bottom = Spacing.paddingTiny),
                 painter = painterResource(painterResource),
                 contentDescription = title,
                 tint = color
