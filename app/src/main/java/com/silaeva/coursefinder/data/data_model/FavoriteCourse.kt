@@ -8,7 +8,7 @@ data class FavoriteCourse(
     @PrimaryKey
     val id: Long,
     val name: String,
-    val owner: Long,
+    val owner: String,
     val description: String,
     val rating: String,
     val date: String,

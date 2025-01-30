@@ -44,7 +44,7 @@ fun CourseCard(
     rating: String,
     onCourseClick: () -> Unit,
     addToFavorites: () -> Unit = {},
-    isSaved: Boolean = false
+    isSaved: Boolean
 ) {
     val isSavedState = remember {
         mutableStateOf(isSaved)

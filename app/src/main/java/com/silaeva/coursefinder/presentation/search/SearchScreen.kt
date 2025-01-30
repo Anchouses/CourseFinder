@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +23,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import com.silaeva.coursefinder.data.data_model.CourseReview
 import com.silaeva.coursefinder.domain.domain_model.CourseModel
 import com.silaeva.coursefinder.presentation.comon_ui.CourseCard
 import com.silaeva.coursefinder.presentation.comon_ui.FilterDialog
@@ -40,24 +42,29 @@ fun SearchScreen(
     val lazyPagingItems = pager.collectAsLazyPagingItems()
 
     SearchScreenUI(
+        viewModel = viewModel,
         lazyPagingItems = lazyPagingItems,
         addSearchText = {
             searchText.value = it
         },
-        addCourseToFavorites = {
-            viewModel.saveCourse(it)
+        addCourseToFavorites = {course, review, owner ->
+            viewModel.saveCourse(course, review, owner)
         },
-        onCourseClick = { onCourseClick(it) }
+        onCourseClick = { course, review, owner ->
+            val correctCourse = course.copy(review = review, owner = owner)
+            onCourseClick(correctCourse)
+        }
     )
 }
 
 @Composable
 fun SearchScreenUI(
     modifier: Modifier = Modifier,
+    viewModel: SearchViewModel,
     lazyPagingItems: LazyPagingItems<CourseModel>,
     addSearchText: (String) -> Unit,
-    addCourseToFavorites: (CourseModel) -> Unit,
-    onCourseClick: (CourseModel) -> Unit
+    addCourseToFavorites: (CourseModel, String, String) -> Unit,
+    onCourseClick: (CourseModel, String, String) -> Unit
 ) {
     var openDialog by remember { mutableStateOf(false) }
     var searchText = ""
@@ -96,15 +103,22 @@ fun SearchScreenUI(
                         key = lazyPagingItems.itemKey { it.id }
                     ) {
                         lazyPagingItems[it]?.let { item ->
+                            viewModel.getOwnerAndReview(ownerId = item.owner.toLong(), reviewId = item.review.toLong())
+                            val owner = viewModel.owner.collectAsState()
+                            val review = viewModel.review.collectAsState(initial = CourseReview(0L, 0L, .0))
                             CourseCard(
                                 title = item.name,
                                 description = item.summary,
                                 price = item.price,
-                                onCourseClick = { onCourseClick(item) },
-                                addToFavorites = { addCourseToFavorites(item) },
-                                rating = "",
+                                onCourseClick = {
+                                    onCourseClick(item, review.value.average.toString(), owner.value.fullName ?: "")
+                                },
+                                addToFavorites = {
+                                    addCourseToFavorites(item, review.value.average.toString(), owner.value.fullName ?: "")
+                                },
+                                rating = review.value.average.toString(),
                                 date = item.date,
-
+                                isSaved = false
                             )
                         }
                     }

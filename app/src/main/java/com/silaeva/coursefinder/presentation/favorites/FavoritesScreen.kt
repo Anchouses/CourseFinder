@@ -62,8 +62,9 @@ fun FavoritesScreenUI(
                     description = courses[it].summary,
                     price = courses[it].price,
                     onCourseClick = { onCourseClick(courses[it]) },
-                    rating = courses[it].rating,
-                    date = courses[it].date
+                    rating = courses[it].review,
+                    date = courses[it].date,
+                    isSaved = courses[it].isSaved
                 )
             }
             item{

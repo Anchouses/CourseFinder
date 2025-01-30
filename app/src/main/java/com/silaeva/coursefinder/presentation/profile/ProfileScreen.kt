@@ -42,7 +42,9 @@ fun ProfileScreen(
 
     ProfileScreenUI(
         courses = courses.value,
-        onCourseClick = { onCourseClick(it) }
+        onCourseClick = { course ->
+            onCourseClick(course)
+        }
     )
 }
 
@@ -153,9 +155,12 @@ fun ProfileScreenUI(
                     title = courses[it].name,
                     description = courses[it].summary,
                     price = courses[it].price,
-                    onCourseClick = { onCourseClick(courses[it]) },
-                    rating = courses[it].rating,
-                    date = courses[it].date
+                    onCourseClick = {
+                        onCourseClick(courses[it])
+                    },
+                    rating = courses[it].review,
+                    date = courses[it].date,
+                    isSaved = courses[it].isSaved
                 )
             }
             item {
