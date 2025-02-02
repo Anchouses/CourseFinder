@@ -212,7 +212,7 @@ fun CourseScreen(
                 )
             }
             item {
-                Spacer(modifier = Modifier.height(Spacing.screenBottomMargin))
+                Spacer(modifier = Modifier.height(Spacing.screenBottomMargin * 2))
             }
         }
     }
