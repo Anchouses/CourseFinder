@@ -47,7 +47,7 @@ fun SearchScreen(
         addSearchText = {
             searchText.value = it
         },
-        addCourseToFavorites = {course, review, owner ->
+        addCourseToFavorites = { course, review, owner ->
             viewModel.saveCourse(course, review, owner)
         },
         onCourseClick = { course, review, owner ->
@@ -93,9 +93,11 @@ fun SearchScreenUI(
                     CircularProgressIndicator()
                 }
             }
+
             is LoadState.Error -> {
                 Log.d("LOAD_ERROR", "Loading error")
             }
+
             is LoadState.NotLoading -> {
                 LazyColumn {
                     items(
@@ -103,27 +105,42 @@ fun SearchScreenUI(
                         key = lazyPagingItems.itemKey { it.id }
                     ) {
                         lazyPagingItems[it]?.let { item ->
-                            viewModel.getOwnerAndReview(ownerId = item.owner.toLong(), reviewId = item.review.toLong())
+                            val isSaved = remember { mutableStateOf(item.isSaved) }
+                            if (viewModel.ids.contains(item.id)) isSaved.value = true
+                            viewModel.getOwnerAndReview(
+                                ownerId = item.owner.toLong(),
+                                reviewId = item.review.toLong()
+                            )
                             val owner = viewModel.owner.collectAsState()
-                            val review = viewModel.review.collectAsState(initial = CourseReview(0L, 0L, .0))
+                            val review =
+                                viewModel.review.collectAsState(initial = CourseReview(0L, 0L, .0))
                             CourseCard(
                                 title = item.name,
                                 description = item.summary,
                                 price = item.price,
                                 onCourseClick = {
-                                    onCourseClick(item, review.value.average.toString(), owner.value.fullName ?: "")
+                                    onCourseClick(
+                                        item,
+                                        review.value.average.toString(),
+                                        owner.value.fullName ?: ""
+                                    )
                                 },
                                 addToFavorites = {
-                                    addCourseToFavorites(item, review.value.average.toString(), owner.value.fullName ?: "")
+                                    viewModel.ids.add(item.id)
+                                    addCourseToFavorites(
+                                        item,
+                                        review.value.average.toString(),
+                                        owner.value.fullName ?: ""
+                                    )
                                 },
                                 rating = review.value.average.toString(),
                                 date = item.date,
-                                isSaved = false
+                                isSaved = isSaved.value
                             )
                         }
                     }
                     item {
-                        Spacer(modifier = Modifier.height(Spacing.screenBottomMargin))
+                        Spacer(modifier = Modifier.height(Spacing.screenBottomMargin * 2))
                     }
                 }
             }

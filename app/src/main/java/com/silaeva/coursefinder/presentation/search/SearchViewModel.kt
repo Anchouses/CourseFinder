@@ -17,13 +17,15 @@ import kotlinx.coroutines.launch
 class SearchViewModel(
     private val getCoursesInteractor: GetCoursesInteractor,
     private val favoriteCoursesInteractor: FavoriteCoursesInteractor
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private var _review = MutableStateFlow(CourseReview(0L, 0L, .0))
     val review: Flow<CourseReview> = _review
-        private val _owner = MutableStateFlow(CourseOwner(0L, ""))
+    private val _owner = MutableStateFlow(CourseOwner(0L, ""))
     val owner: StateFlow<CourseOwner> = _owner
     private var requestJob: Job? = null
+
+    val ids = mutableSetOf<Long>()
 
     fun getCourses(searchText: String) = getCoursesInteractor.getCourses(searchText)
 
